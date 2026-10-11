@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dev Burguer — A melhor hamburgueria do DF</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="styles/output.css" />
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          char: '#17130F',
+          char2: '#201A15',
+          cream: '#FFF3E2',
+          flame: '#FF4E1F',
+          flame2: '#C81D25',
+          mustard: '#FFB627',
+        },
+        fontFamily: {
+          display: ['"Bebas Neue"', 'sans-serif'],
+          body: ['Inter', 'sans-serif'],
+        },
+      }
+    }
+  }
+</script>
+<style>
+  body { font-family: 'Inter', sans-serif; background: #17130F; }
+  h1, h2, h3, .display { font-family: 'Bebas Neue', sans-serif; letter-spacing: 0.02em; }
+
+  .sizzle { height: 60px; width: 100%; display: block; }
+
+  .menu-card {
+    position: relative;
+    overflow: hidden;
+    transition: transform .35s ease, box-shadow .35s ease;
+  }
+  .menu-card:hover { transform: translateY(-6px); box-shadow: 0 24px 44px -14px rgba(255, 78, 31, 0.4); }
+  .menu-card img { transition: transform .5s ease; }
+  .menu-card:hover img { transform: scale(1.08); }
+
+  .badge-ring {
+    background: conic-gradient(from 0deg, #FF4E1F, #FFB627, #C81D25, #FF4E1F);
+    padding: 4px;
+    border-radius: 9999px;
+  }
+
+  .reveal { opacity: 0; transform: translateY(24px); transition: opacity .6s ease, transform .6s ease; }
+  .reveal.is-visible { opacity: 1; transform: translateY(0); }
+
+  .price-tag { background: repeating-linear-gradient(45deg, #FF4E1F, #FF4E1F 8px, #e8460f 8px, #e8460f 16px); }
+
+  .hero-float {
+    animation: floaty 4.5s ease-in-out infinite;
+  }
+  @keyframes floaty {
+    0%, 100% { transform: translateY(0px) rotate(-2deg); }
+    50% { transform: translateY(-14px) rotate(1deg); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .reveal { transition: none; opacity: 1; transform: none; }
+    .menu-card, .menu-card img { transition: none; }
+    .hero-float { animation: none; }
+  }
+
+  .whats-pulse {
+    box-shadow: 0 0 0 0 rgba(255, 78, 31, 0.6);
+    animation: pulse 2.4s infinite;
+  }
+  @keyframes pulse {
+    0% { box-shadow: 0 0 0 0 rgba(255, 78, 31, 0.55); }
+    70% { box-shadow: 0 0 0 16px rgba(255, 78, 31, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(255, 78, 31, 0); }
+  }
+
+  .ribbon {
+    background: linear-gradient(90deg, #FF4E1F, #C81D25);
+  }
+
+  #topnav { backdrop-filter: blur(10px); }
+</style>
+</head>
+<body class="bg-char text-cream">
+
+  <!-- PROMO TOPBAR -->
+  <div class="ribbon text-char text-center text-xs sm:text-sm font-bold py-2 px-4">
+    🔥 Combo do dia: 2 hambúrgueres + batata + 2 refris — peça pelo WhatsApp e garanta o seu
+  </div>
+
+  <!-- STICKY NAV -->
+  <nav id="topnav" class="sticky top-0 z-40 bg-char/90 border-b border-cream/10">
+    <div class="max-w-6xl mx-auto px-6 py-3 flex items-center justify-between">
+      <a href="#top" class="display text-2xl tracking-wide">DEV <span class="text-flame">BURGUER</span></a>
+      <div class="hidden sm:flex items-center gap-8 text-sm font-semibold text-cream/80">
+        <a href="#menu" class="hover:text-flame transition-colors">Cardápio</a>
+        <a href="#bebidas" class="hover:text-flame transition-colors">Bebidas</a>
+        <a href="#como-pedir" class="hover:text-flame transition-colors">Como pedir</a>
+      </div>
+      <a href="https://wa.me/5561SEUNUMERO" target="_blank"
+         class="bg-flame hover:bg-flame2 transition-colors text-char font-bold text-sm px-5 py-2 rounded-full">
+        Pedir agora
+      </a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <header id="top" class="relative overflow-hidden">
+    <div class="absolute inset-0 bg-cover bg-center" style="background-image:url('./img/hero-bg.png')"></div>
+    <div class="absolute inset-0 bg-char/60"></div>
+    <div class="absolute inset-0 bg-gradient-to-t from-char via-char/30 to-char/70"></div>
+
+    <div class="relative z-10 max-w-6xl mx-auto px-6 pt-16 pb-20 grid md:grid-cols-2 gap-10 items-center">
+
+      <div class="text-center md:text-left">
+        <div class="inline-flex items-center gap-2 bg-flame/15 border border-flame/40 text-mustard px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider">
+          <span class="w-2 h-2 rounded-full bg-mustard animate-pulse"></span>
+          Aberto agora · Seg à Dom, 18h às 23h
+        </div>
+
+        <h1 class="display text-6xl sm:text-7xl mt-5 leading-[0.95]">
+          DEV <span class="text-flame">BURGUER</span>
+        </h1>
+        <p class="mt-3 text-cream/70 text-base sm:text-lg max-w-md mx-auto md:mx-0">
+          Hambúrguer artesanal, chapa quente e ingredientes fresquinhos.
+          Feito na hora, do jeito que você merece.
+        </p>
+
+        <p class="mt-4 text-cream/60 text-sm">📍 Rua Dev, 10 — Taguatinga, DF</p>
+
+        <div class="mt-8 flex flex-col sm:flex-row gap-3 justify-center md:justify-start">
+          <a href="https://wa.me/5561SEUNUMERO" target="_blank"
+             class="inline-flex items-center justify-center gap-2 bg-flame hover:bg-flame2 transition-colors text-char font-bold px-8 py-4 rounded-full shadow-lg shadow-flame/30 text-lg">
+            Peça agora no WhatsApp →
+          </a>
+          <a href="#menu"
+             class="inline-flex items-center justify-center gap-2 border border-cream/30 hover:border-flame hover:text-flame transition-colors text-cream font-semibold px-8 py-4 rounded-full">
+            Ver cardápio
+          </a>
+        </div>
+      </div>
+
+      <div class="relative hidden md:block">
+        <div class="hero-float relative mx-auto w-80 h-80 rounded-full overflow-hidden border-8 border-char2 shadow-2xl">
+          <img src="./img/hamb-6.png" alt="Hambúrguer artesanal Dev Burguer" class="w-full h-full object-cover">
+        </div>
+        <div class="absolute -bottom-2 -left-4 bg-mustard text-char font-bold text-sm px-4 py-2 rounded-full shadow-lg rotate-[-6deg]">
+          Feito na chapa 🔥
+        </div>
+      </div>
+
+    </div>
+
+    <svg class="sizzle relative z-10" viewBox="0 0 1200 60" preserveAspectRatio="none">
+      <path d="M0,30 C150,60 300,0 450,30 C600,60 750,0 900,30 C1050,60 1150,10 1200,30 L1200,60 L0,60 Z" fill="#FFF3E2" />
+    </svg>
+  </header>
+
+  <main class="bg-cream text-char">
+
+    <!-- MENU -->
+    <section id="menu" class="max-w-6xl mx-auto px-6 py-16">
+      <div class="text-center mb-12 reveal">
+        <p class="uppercase tracking-[0.3em] text-flame2 text-xs font-bold">Feito na chapa, na hora</p>
+        <h2 class="display text-5xl mt-2">Conheça nosso menu</h2>
+        <p class="text-char/50 text-sm mt-2 max-w-md mx-auto">Escolha o seu, chama no WhatsApp e pronto — simples assim.</p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+
+        <!-- ITEM 1 -->
+        <div class="menu-card reveal bg-white rounded-2xl shadow-sm border border-char/5 overflow-hidden flex flex-col">
+          <div class="relative h-48 overflow-hidden">
+            <img src="./img/hamb-2.png" alt="Bacon Smash" class="w-full h-full object-cover">
+            <span class="absolute top-3 left-3 bg-mustard text-char text-xs font-bold px-3 py-1 rounded-full shadow">⭐ Mais pedido</span>
+          </div>
+          <div class="p-5 flex flex-col flex-1">
+            <h3 class="display text-2xl leading-none">Bacon Smash</h3>
+            <p class="text-char/60 text-sm mt-2 flex-1">Duas carnes smash 90g, bacon crocante, cheddar e molho da casa</p>
+            <div class="flex items-center justify-between mt-4">
+              <span class="price-tag inline-block text-white text-sm font-bold px-3 py-1 rounded-full">R$ 24,90</span>
+              <a href="https://wa.me/5561SEUNUMERO?text=Quero%20pedir%20o%20Bacon%20Smash!" target="_blank"
+                 aria-label="Pedir Bacon Smash no WhatsApp"
+                 class="bg-char text-cream w-11 h-11 rounded-full flex items-center justify-center hover:bg-flame transition-colors flex-shrink-0">🛒</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- ITEM 2 -->
+        <div class="menu-card reveal bg-white rounded-2xl shadow-sm border border-char/5 overflow-hidden flex flex-col">
+          <div class="relative h-48 overflow-hidden">
+            <img src="./img/hamb-3.png" alt="Duplo Cheddar" class="w-full h-full object-cover">
+          </div>
+          <div class="p-5 flex flex-col flex-1">
+            <h3 class="display text-2xl leading-none">Duplo Cheddar</h3>
+            <p class="text-char/60 text-sm mt-2 flex-1">2 carnes 160g e camadas generosas de queijo cheddar derretido</p>
+            <div class="flex items-center justify-between mt-4">
+              <span class="price-tag inline-block text-white text-sm font-bold px-3 py-1 rounded-full">R$ 32,90</span>
+              <a href="https://wa.me/5561SEUNUMERO?text=Quero%20pedir%20o%20Duplo%20Cheddar!" target="_blank"
+                 aria-label="Pedir Duplo Cheddar no WhatsApp"
+                 class="bg-char text-cream w-11 h-11 rounded-full flex items-center justify-center hover:bg-flame transition-colors flex-shrink-0">🛒</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- ITEM 3 -->
+        <div class="menu-card reveal bg-white rounded-2xl shadow-sm border border-char/5 overflow-hidden flex flex-col">
+          <div class="relative h-48 overflow-hidden">
+            <img src="./img/hamb-4.png" alt="Frango Crocante" class="w-full h-full object-cover">
+          </div>
+          <div class="p-5 flex flex-col flex-1">
+            <h3 class="display text-2xl leading-none">Frango Crocante</h3>
+            <p class="text-char/60 text-sm mt-2 flex-1">Filé de frango empanado, alface, tomate, cebola roxa e picles</p>
+            <div class="flex items-center justify-between mt-4">
+              <span class="price-tag inline-block text-white text-sm font-bold px-3 py-1 rounded-full">R$ 26,90</span>
+              <a href="https://wa.me/5561SEUNUMERO?text=Quero%20pedir%20o%20Frango%20Crocante!" target="_blank"
+                 aria-label="Pedir Frango Crocante no WhatsApp"
+                 class="bg-char text-cream w-11 h-11 rounded-full flex items-center justify-center hover:bg-flame transition-colors flex-shrink-0">🛒</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- ITEM 4 -->
+        <div class="menu-card reveal bg-white rounded-2xl shadow-sm border border-char/5 overflow-hidden flex flex-col">
+          <div class="relative h-48 overflow-hidden">
+            <img src="./img/hamb-5.png" alt="Clássico da Casa" class="w-full h-full object-cover">
+          </div>
+          <div class="p-5 flex flex-col flex-1">
+            <h3 class="display text-2xl leading-none">Clássico da Casa</h3>
+            <p class="text-char/60 text-sm mt-2 flex-1">Carne 160g, queijo, bacon, alface e tomate no pão australiano</p>
+            <div class="flex items-center justify-between mt-4">
+              <span class="price-tag inline-block text-white text-sm font-bold px-3 py-1 rounded-full">R$ 30,00</span>
+              <a href="https://wa.me/5561SEUNUMERO?text=Quero%20pedir%20o%20Cl%C3%A1ssico%20da%20Casa!" target="_blank"
+                 aria-label="Pedir Clássico da Casa no WhatsApp"
+                 class="bg-char text-cream w-11 h-11 rounded-full flex items-center justify-center hover:bg-flame transition-colors flex-shrink-0">🛒</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- ITEM 5 -->
+        <div class="menu-card reveal bg-white rounded-2xl shadow-sm border border-char/5 overflow-hidden flex flex-col">
+          <div class="relative h-48 overflow-hidden">
+            <img src="./img/hamb-6.png" alt="Gourmet Especial" class="w-full h-full object-cover">
+            <span class="absolute top-3 left-3 bg-flame text-white text-xs font-bold px-3 py-1 rounded-full shadow">🔥 Favorito da casa</span>
+          </div>
+          <div class="p-5 flex flex-col flex-1">
+            <h3 class="display text-2xl leading-none">Gourmet Especial</h3>
+            <p class="text-char/60 text-sm mt-2 flex-1">Carne artesanal, queijo prato derretido, cebola roxa e molho especial</p>
+            <div class="flex items-center justify-between mt-4">
+              <span class="price-tag inline-block text-white text-sm font-bold px-3 py-1 rounded-full">R$ 35,90</span>
+              <a href="https://wa.me/5561SEUNUMERO?text=Quero%20pedir%20o%20Gourmet%20Especial!" target="_blank"
+                 aria-label="Pedir Gourmet Especial no WhatsApp"
+                 class="bg-char text-cream w-11 h-11 rounded-full flex items-center justify-center hover:bg-flame transition-colors flex-shrink-0">🛒</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- ITEM 6 -->
+        <div class="menu-card reveal bg-white rounded-2xl shadow-sm border border-char/5 overflow-hidden flex flex-col">
+          <div class="relative h-48 overflow-hidden">
+            <img src="./img/hamb-7.png" alt="Barbecue Onion" class="w-full h-full object-cover">
+          </div>
+          <div class="p-5 flex flex-col flex-1">
+            <h3 class="display text-2xl leading-none">Barbecue Onion</h3>
+            <p class="text-char/60 text-sm mt-2 flex-1">Carne 160g, anéis de cebola empanados e molho barbecue</p>
+            <div class="flex items-center justify-between mt-4">
+              <span class="price-tag inline-block text-white text-sm font-bold px-3 py-1 rounded-full">R$ 33,90</span>
+              <a href="https://wa.me/5561SEUNUMERO?text=Quero%20pedir%20o%20Barbecue%20Onion!" target="_blank"
+                 aria-label="Pedir Barbecue Onion no WhatsApp"
+                 class="bg-char text-cream w-11 h-11 rounded-full flex items-center justify-center hover:bg-flame transition-colors flex-shrink-0">🛒</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- ITEM 7 -->
+        <div class="menu-card reveal bg-white rounded-2xl shadow-sm border border-char/5 overflow-hidden flex flex-col sm:col-span-2 lg:col-span-1">
+          <div class="relative h-48 overflow-hidden">
+            <img src="./img/hamb-8.png" alt="Veggie" class="w-full h-full object-cover">
+            <span class="absolute top-3 left-3 bg-green-600 text-white text-xs font-bold px-3 py-1 rounded-full shadow">🌱 Vegano</span>
+          </div>
+          <div class="p-5 flex flex-col flex-1">
+            <h3 class="display text-2xl leading-none">Veggie</h3>
+            <p class="text-char/60 text-sm mt-2 flex-1">Hambúrguer vegetal, mix de folhas, cenoura e beterraba em conserva</p>
+            <div class="flex items-center justify-between mt-4">
+              <span class="price-tag inline-block text-white text-sm font-bold px-3 py-1 rounded-full">R$ 28,90</span>
+              <a href="https://wa.me/5561SEUNUMERO?text=Quero%20pedir%20o%20Veggie!" target="_blank"
+                 aria-label="Pedir Veggie no WhatsApp"
+                 class="bg-char text-cream w-11 h-11 rounded-full flex items-center justify-center hover:bg-flame transition-colors flex-shrink-0">🛒</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- BEBIDAS -->
+    <section id="bebidas" class="max-w-5xl mx-auto px-6 pb-16">
+      <div class="text-center mb-10 reveal">
+        <p class="uppercase tracking-[0.3em] text-flame2 text-xs font-bold">Pra descer redondo</p>
+        <h2 class="display text-4xl mt-2">Bebidas</h2>
+      </div>
+
+      <div class="grid grid-cols-2 gap-6 max-w-md mx-auto">
+        <div class="reveal bg-white rounded-2xl shadow-sm border border-char/5 p-4 text-center">
+          <img src="./img/refri-1.png" alt="Coca-Cola lata 350ml" class="w-16 h-16 mx-auto object-contain">
+          <h3 class="display text-xl mt-2">Coca-Cola</h3>
+          <p class="text-char/50 text-xs">Lata 350ml</p>
+          <span class="price-tag inline-block text-white text-xs font-bold px-3 py-1 rounded-full mt-2">R$ 6,00</span>
+        </div>
+        <div class="reveal bg-white rounded-2xl shadow-sm border border-char/5 p-4 text-center">
+          <img src="./img/refri-2.png" alt="Guaraná Antarctica lata 350ml" class="w-16 h-16 mx-auto object-contain">
+          <h3 class="display text-xl mt-2">Guaraná</h3>
+          <p class="text-char/50 text-xs">Lata 350ml</p>
+          <span class="price-tag inline-block text-white text-xs font-bold px-3 py-1 rounded-full mt-2">R$ 6,00</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- COMO PEDIR -->
+    <section id="como-pedir" class="bg-char2 py-16">
+      <div class="max-w-4xl mx-auto px-6 text-center reveal">
+        <p class="uppercase tracking-[0.3em] text-flame text-xs font-bold">Simples assim</p>
+        <h2 class="display text-4xl mt-2 text-cream">Como pedir</h2>
+
+        <div class="grid sm:grid-cols-3 gap-6 mt-10 text-left">
+          <div class="bg-char rounded-2xl p-6 border border-cream/10">
+            <span class="display text-4xl text-flame">1</span>
+            <h3 class="font-bold text-cream mt-2">Escolha seu lanche</h3>
+            <p class="text-cream/50 text-sm mt-1">Veja o cardápio e escolha o combo perfeito pra você.</p>
+          </div>
+          <div class="bg-char rounded-2xl p-6 border border-cream/10">
+            <span class="display text-4xl text-flame">2</span>
+            <h3 class="font-bold text-cream mt-2">Chame no WhatsApp</h3>
+            <p class="text-cream/50 text-sm mt-1">Toque em pedir e confirme seu endereço com a gente.</p>
+          </div>
+          <div class="bg-char rounded-2xl p-6 border border-cream/10">
+            <span class="display text-4xl text-flame">3</span>
+            <h3 class="font-bold text-cream mt-2">Receba quentinho</h3>
+            <p class="text-cream/50 text-sm mt-1">Preparamos na hora e mandamos pro seu endereço.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA FINAL -->
+    <section class="relative overflow-hidden">
+      <div class="absolute inset-0 bg-cover bg-center" style="background-image:url('./img/hero-bg.png')"></div>
+      <div class="absolute inset-0 bg-char/85"></div>
+      <div class="relative z-10 max-w-2xl mx-auto text-center px-6 py-20">
+        <h2 class="display text-5xl text-cream">Bateu a fome?</h2>
+        <p class="text-cream/70 mt-3">Chama a gente no WhatsApp e seu hambúrguer sai direto da chapa pra sua casa.</p>
+        <a href="https://wa.me/5561SEUNUMERO" target="_blank"
+           class="inline-flex items-center gap-2 bg-flame hover:bg-flame2 transition-colors text-char font-bold px-8 py-4 rounded-full shadow-lg shadow-flame/30 text-lg mt-6">
+          Peça agora no WhatsApp →
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="bg-char text-cream/50 text-center py-8 text-sm border-t border-cream/5">
+    <p class="display text-xl text-cream/80 mb-1">DEV <span class="text-flame">BURGUER</span></p>
+    <p>📍 Rua Dev, 10 — Taguatinga, DF · Seg à Dom, 18h às 23h</p>
+    <p class="mt-2">© 2026 Dev Burguer</p>
+  </footer>
+
+  <!-- WHATSAPP FLOATING BUTTON -->
+  <a href="https://wa.me/5561SEUNUMERO" target="_blank"
+     class="whats-pulse fixed bottom-5 right-5 bg-flame text-char px-6 py-3 rounded-full shadow-lg font-bold hover:bg-flame2 hover:text-cream transition-colors z-50 flex items-center gap-2">
+     📱 Pedir no WhatsApp
+  </a>
+
+  <script>
+    const revealEls = document.querySelectorAll('.reveal');
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+    revealEls.forEach(el => io.observe(el));
+  </script>
+
+</body>
+</html>
